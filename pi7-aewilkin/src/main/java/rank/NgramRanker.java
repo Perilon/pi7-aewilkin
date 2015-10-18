@@ -156,7 +156,7 @@ public class NgramRanker extends AbstractRanker {
       F1NG = 0;
     
     
-    passage.setScore(F1NG);
+    passage.setScoreNgram(F1NG);
     
     passage.addToIndexes();
     

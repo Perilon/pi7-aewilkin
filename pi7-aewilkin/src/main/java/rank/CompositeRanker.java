@@ -5,6 +5,8 @@ import java.util.List;
 
 import type.Passage;
 import type.Question;
+import org.apache.uima.jcas.JCas;
+
 
 public class CompositeRanker extends AbstractRanker implements IAggregator {
 
@@ -27,10 +29,10 @@ public class CompositeRanker extends AbstractRanker implements IAggregator {
    * @return a score of the passage
    */
   @Override
-  public Double score(Question question, Passage passage) {
+  public Double score(JCas aJCas, Question question, Passage passage) {
     List<Double> scores = new ArrayList<Double>();
     for (IRanker r : rankers) {
-      scores.add(r.score(question, passage));
+      scores.add(r.score(aJCas, question, passage));
     }
     return aggregateScores(scores);
   }

@@ -13,7 +13,7 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 
 /** Stores the information of the passage.
- * Updated by JCasGen Sun Oct 18 16:10:08 EDT 2015
+ * Updated by JCasGen Sun Oct 18 18:21:10 EDT 2015
  * @generated */
 public class Passage_Type extends ComponentAnnotation_Type {
   /** @generated 
@@ -140,6 +140,54 @@ public class Passage_Type extends ComponentAnnotation_Type {
     ll_cas.ll_setRefValue(addr, casFeatCode_question, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_scoreNgram;
+  /** @generated */
+  final int     casFeatCode_scoreNgram;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public double getScoreNgram(int addr) {
+        if (featOkTst && casFeat_scoreNgram == null)
+      jcas.throwFeatMissing("scoreNgram", "type.Passage");
+    return ll_cas.ll_getDoubleValue(addr, casFeatCode_scoreNgram);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setScoreNgram(int addr, double v) {
+        if (featOkTst && casFeat_scoreNgram == null)
+      jcas.throwFeatMissing("scoreNgram", "type.Passage");
+    ll_cas.ll_setDoubleValue(addr, casFeatCode_scoreNgram, v);}
+    
+  
+ 
+  /** @generated */
+  final Feature casFeat_scoreOther;
+  /** @generated */
+  final int     casFeatCode_scoreOther;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public double getScoreOther(int addr) {
+        if (featOkTst && casFeat_scoreOther == null)
+      jcas.throwFeatMissing("scoreOther", "type.Passage");
+    return ll_cas.ll_getDoubleValue(addr, casFeatCode_scoreOther);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setScoreOther(int addr, double v) {
+        if (featOkTst && casFeat_scoreOther == null)
+      jcas.throwFeatMissing("scoreOther", "type.Passage");
+    ll_cas.ll_setDoubleValue(addr, casFeatCode_scoreOther, v);}
+    
+  
 
 
 
@@ -167,6 +215,14 @@ public class Passage_Type extends ComponentAnnotation_Type {
  
     casFeat_question = jcas.getRequiredFeatureDE(casType, "question", "type.Question", featOkTst);
     casFeatCode_question  = (null == casFeat_question) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_question).getCode();
+
+ 
+    casFeat_scoreNgram = jcas.getRequiredFeatureDE(casType, "scoreNgram", "uima.cas.Double", featOkTst);
+    casFeatCode_scoreNgram  = (null == casFeat_scoreNgram) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_scoreNgram).getCode();
+
+ 
+    casFeat_scoreOther = jcas.getRequiredFeatureDE(casType, "scoreOther", "uima.cas.Double", featOkTst);
+    casFeatCode_scoreOther  = (null == casFeat_scoreOther) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_scoreOther).getCode();
 
   }
 }

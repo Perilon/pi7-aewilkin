@@ -95,6 +95,16 @@ You need to implement the types requried for your ranking model.</description>
           <description>This denotes the corresponding question ID.</description>
           <rangeTypeName>type.Question</rangeTypeName>
         </featureDescription>
+      <featureDescription>
+          <name>scoreNgram</name>
+          <description>The score for a passage as determined by the ngram ranker</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>scoreOther</name>
+          <description>The score for a passage as determined by the "Other" ranker.</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
       </features>
     </typeDescription>
     <typeDescription>

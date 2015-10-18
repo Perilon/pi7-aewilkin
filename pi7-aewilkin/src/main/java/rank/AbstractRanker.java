@@ -1,11 +1,13 @@
 package rank;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import type.Passage;
 import type.Question;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.FSArray;
 
 
 /**
@@ -31,14 +33,145 @@ public abstract class AbstractRanker implements IRanker {
     // Score all the given passages and sort them in List object 'rankedPassages' below.
     
     
+    int numPassages = passages.size();
+    
     List<Passage> rankedPassages = new ArrayList<Passage>();
     
-    
-    
-    
-    
+    class Psg implements Comparable {
+      
+      private int begin;
+      private int end;
+      private String sentence;
+      private String sentLem;
+      private double score;
+      private boolean label;
+      private String sourceDocID;
+      private String id;
+     
+      public Psg() {
+      }
+      
+      public void setBegin(int bg) {
+        this.begin = bg;
+      }
+      
+      public void setEnd(int e) {
+        this.end = e;
+      }
+      
+      public void setSentence(String sent) {
+        this.sentence = sent;
+      }
+      
+      public void setSentLem(String sentLem) {
+        this.sentLem = sentLem;
+      }
+      
+      public void setScore(double sc) {
+        this.score = sc;
+      }
+      
+      public void setLabel(boolean lb) {
+        this.label = lb;
+      }
+      
+      public void setSourceDocID(String sdi) {
+        this.sourceDocID = sdi;
+      }
+      
+      public void setID(String id) {
+        this.id = id;
+      }
+      
+      public int getBegin() {
+        return this.begin;
+      }
+      
+      public int getEnd() {
+        return this.end;
+      }
+      
+      public String getSentence() {
+        return this.sentence;
+      }
+      
+      public String getSentLem() {
+        return this.sentLem;
+      }
+      
+      public double getScore() {
+        return this.score;
+      }
+      
+      public boolean getLabel() {
+        return this.label;
+      }
+      
+      public String getSourceDocID() {
+        return this.sourceDocID;
+      }
+      
+      public String getId() {
+        return this.id;
+      }
 
+      public int compareTo(Object anotherPsg) {
+        if (!(anotherPsg instanceof Psg)) {
+          throw new ClassCastException("A Passage object is expected.");
+        }
+        double anotherPsgScore = ((Psg) anotherPsg).getScore();
+        return Double.compare(anotherPsgScore, this.score);
+      }
+    }
+    
+    /*Put each member of passageFSArray into a regular array; then sort the array*/
+    
+    Psg[] psgArray = new Psg[numPassages];
+    
+    for (int i = 0; i < numPassages; i++) {
+      Passage passage = (Passage) passages.get(i);
+      
+      Psg psg = new Psg();
+      
+      psg.setBegin(passage.getBegin());
+      psg.setEnd(passage.getEnd());
+            
+      psg.setScore(score(aJCas, question, passage));
+      
+      psg.setSentence(passage.getSentence());
+      psg.setLabel(passage.getLabel());
+      psg.setSourceDocID(passage.getSourceDocId());
+      
+      psgArray[i] = psg;
+    }
+    
+    Arrays.sort(psgArray);
+    
+    /*Then put the items in that array, which are now ordered by score, into a new FSArray.  That FSArray becomes the
+    RankedPassageFSArray feature of the QASet*/
+    
+    FSArray RankedPassageFSArray = new FSArray(aJCas, numPassages);
+    
+    for (int i = 0; i < numPassages; i++) {
+      Passage newPass = new Passage(aJCas);
+      
+      newPass.setBegin(psgArray[i].getBegin());
+      newPass.setEnd(psgArray[i].getEnd());
+      newPass.setScore(psgArray[i].getScore());
+      newPass.setSentence(psgArray[i].getSentence());
+      newPass.setLabel(psgArray[i].getLabel());
+      newPass.setSourceDocId(psgArray[i].getSourceDocID());
+      
+      /*We're still in the same question of the question iterator existing below the iterator of the QASet, so this should
+      be the right one.*/
+      
+      newPass.setQuestion(question);
+      
+      rankedPassages.set(i, newPass);
+    }
+    
     return rankedPassages;
+    
   }
   
   

@@ -10,7 +10,7 @@ import org.apache.uima.jcas.cas.TOP_Type;
 
 
 /** Stores the information of the passage.
- * Updated by JCasGen Sun Oct 18 16:10:08 EDT 2015
+ * Updated by JCasGen Sun Oct 18 18:21:10 EDT 2015
  * XML source: /home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/typeSystem.xml
  * @generated */
 public class Passage extends ComponentAnnotation {
@@ -161,6 +161,50 @@ public class Passage extends ComponentAnnotation {
     if (Passage_Type.featOkTst && ((Passage_Type)jcasType).casFeat_question == null)
       jcasType.jcas.throwFeatMissing("question", "type.Passage");
     jcasType.ll_cas.ll_setRefValue(addr, ((Passage_Type)jcasType).casFeatCode_question, jcasType.ll_cas.ll_getFSRef(v));}    
+   
+    
+  //*--------------*
+  //* Feature: scoreNgram
+
+  /** getter for scoreNgram - gets The score for a passage as determined by the ngram ranker
+   * @generated
+   * @return value of the feature 
+   */
+  public double getScoreNgram() {
+    if (Passage_Type.featOkTst && ((Passage_Type)jcasType).casFeat_scoreNgram == null)
+      jcasType.jcas.throwFeatMissing("scoreNgram", "type.Passage");
+    return jcasType.ll_cas.ll_getDoubleValue(addr, ((Passage_Type)jcasType).casFeatCode_scoreNgram);}
+    
+  /** setter for scoreNgram - sets The score for a passage as determined by the ngram ranker 
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setScoreNgram(double v) {
+    if (Passage_Type.featOkTst && ((Passage_Type)jcasType).casFeat_scoreNgram == null)
+      jcasType.jcas.throwFeatMissing("scoreNgram", "type.Passage");
+    jcasType.ll_cas.ll_setDoubleValue(addr, ((Passage_Type)jcasType).casFeatCode_scoreNgram, v);}    
+   
+    
+  //*--------------*
+  //* Feature: scoreOther
+
+  /** getter for scoreOther - gets The score for a passage as determined by the "Other" ranker.
+   * @generated
+   * @return value of the feature 
+   */
+  public double getScoreOther() {
+    if (Passage_Type.featOkTst && ((Passage_Type)jcasType).casFeat_scoreOther == null)
+      jcasType.jcas.throwFeatMissing("scoreOther", "type.Passage");
+    return jcasType.ll_cas.ll_getDoubleValue(addr, ((Passage_Type)jcasType).casFeatCode_scoreOther);}
+    
+  /** setter for scoreOther - sets The score for a passage as determined by the "Other" ranker. 
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setScoreOther(double v) {
+    if (Passage_Type.featOkTst && ((Passage_Type)jcasType).casFeat_scoreOther == null)
+      jcasType.jcas.throwFeatMissing("scoreOther", "type.Passage");
+    jcasType.ll_cas.ll_setDoubleValue(addr, ((Passage_Type)jcasType).casFeatCode_scoreOther, v);}    
   }
 
     
