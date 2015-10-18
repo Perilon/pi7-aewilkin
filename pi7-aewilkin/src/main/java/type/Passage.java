@@ -10,8 +10,8 @@ import org.apache.uima.jcas.cas.TOP_Type;
 
 
 /** Stores the information of the passage.
- * Updated by JCasGen Mon Oct 12 15:10:51 EDT 2015
- * XML source: /home/junaraki/git/f15-11-791/template-projects/pi7/pi7-andrewid/src/main/resources/descriptors/typeSystem.xml
+ * Updated by JCasGen Sun Oct 18 16:10:08 EDT 2015
+ * XML source: /home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/typeSystem.xml
  * @generated */
 public class Passage extends ComponentAnnotation {
   /** @generated
@@ -76,25 +76,25 @@ public class Passage extends ComponentAnnotation {
  
     
   //*--------------*
-  //* Feature: text
+  //* Feature: sentence
 
-  /** getter for text - gets The passage text extracted from the source document.
+  /** getter for sentence - gets The passage text extracted from the source document.
    * @generated
    * @return value of the feature 
    */
-  public String getText() {
-    if (Passage_Type.featOkTst && ((Passage_Type)jcasType).casFeat_text == null)
-      jcasType.jcas.throwFeatMissing("text", "type.Passage");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((Passage_Type)jcasType).casFeatCode_text);}
+  public String getSentence() {
+    if (Passage_Type.featOkTst && ((Passage_Type)jcasType).casFeat_sentence == null)
+      jcasType.jcas.throwFeatMissing("sentence", "type.Passage");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((Passage_Type)jcasType).casFeatCode_sentence);}
     
-  /** setter for text - sets The passage text extracted from the source document. 
+  /** setter for sentence - sets The passage text extracted from the source document. 
    * @generated
    * @param v value to set into the feature 
    */
-  public void setText(String v) {
-    if (Passage_Type.featOkTst && ((Passage_Type)jcasType).casFeat_text == null)
-      jcasType.jcas.throwFeatMissing("text", "type.Passage");
-    jcasType.ll_cas.ll_setStringValue(addr, ((Passage_Type)jcasType).casFeatCode_text, v);}    
+  public void setSentence(String v) {
+    if (Passage_Type.featOkTst && ((Passage_Type)jcasType).casFeat_sentence == null)
+      jcasType.jcas.throwFeatMissing("sentence", "type.Passage");
+    jcasType.ll_cas.ll_setStringValue(addr, ((Passage_Type)jcasType).casFeatCode_sentence, v);}    
    
     
   //*--------------*

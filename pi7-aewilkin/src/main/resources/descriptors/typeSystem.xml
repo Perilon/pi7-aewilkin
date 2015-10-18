@@ -76,7 +76,7 @@ You need to implement the types requried for your ranking model.</description>
       <supertypeName>type.ComponentAnnotation</supertypeName>
       <features>
         <featureDescription>
-          <name>text</name>
+          <name>sentence</name>
           <description>The passage text extracted from the source document.</description>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
@@ -118,6 +118,41 @@ You need to implement the types requried for your ranking model.</description>
           <rangeTypeName>uima.cas.Integer</rangeTypeName>
         </featureDescription>
         </features>
+    </typeDescription>
+  <typeDescription>
+      <name>type.Token</name>
+      <description>A token.</description>
+      <supertypeName>type.ComponentAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>toStringValue</name>
+          <description>A string representing  the token</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>type.Ngram</name>
+      <description>Ngram type</description>
+      <supertypeName>type.ComponentAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>n</name>
+          <description>The value of n</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>tokens</name>
+          <description>The tokens that make up an ngram</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>type.Token</elementType>
+        </featureDescription>
+        <featureDescription>
+          <name>toStringValue</name>
+          <description>The string representation of the ngram</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
     </typeDescription>
   </types>
 </typeSystemDescription>

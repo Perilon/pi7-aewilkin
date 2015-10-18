@@ -9,6 +9,14 @@
     <delegateAnalysisEngine key="passageAnnotatorDescriptor">
       <import name="descriptors.passageAnnotatorDescriptor"/>
     </delegateAnalysisEngine>
+  <delegateAnalysisEngine key="TokenAnnotatorDescriptor">
+      <import location="/home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/TokenAnnotatorDescriptor.xml"/>
+    
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="NgramAnnotatorDescriptor">
+      <import location="/home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/NgramAnnotatorDescriptor.xml"/>
+    
+    </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
   <analysisEngineMetaData>
     <name>aaeDescriptor</name>
@@ -21,6 +29,8 @@
       <fixedFlow>
         <node>questionAnnotatorDescriptor</node>
         <node>passageAnnotatorDescriptor</node>
+      <node>TokenAnnotatorDescriptor</node>
+        <node>NgramAnnotatorDescriptor</node>
       </fixedFlow>
     </flowConstraints>
     <typePriorities/>

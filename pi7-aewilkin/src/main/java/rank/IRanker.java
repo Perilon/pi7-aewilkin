@@ -4,6 +4,8 @@ import java.util.List;
 
 import type.Passage;
 import type.Question;
+import org.apache.uima.jcas.JCas;
+
 
 public interface IRanker {
 
@@ -14,7 +16,7 @@ public interface IRanker {
    * @param question
    * @param passages
    */
-  public List<Passage> rank(Question question, List<Passage> passages);
+  public List<Passage> rank(JCas aJCas, Question question, List<Passage> passages);
 
   /**
    * Returns a score of the given passage associated with the given question.
@@ -23,6 +25,6 @@ public interface IRanker {
    * @param passage
    * @return a score of the passage
    */
-  public Double score(Question question, Passage passage);
+  public Double score(JCas aJCas, Question question, Passage passage);
 
 }
