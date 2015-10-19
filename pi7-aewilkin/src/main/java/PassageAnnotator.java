@@ -40,7 +40,7 @@ public class PassageAnnotator extends JCasAnnotator_ImplBase {
       passage.setQuestion(question);
       passage.setSourceDocId(matcher.group(2));
       passage.setLabel(!(matcher.group(3).compareTo("-1") == 0));
-      passage.setText(matcher.group(4));
+      passage.setSentence(matcher.group(4));
       passage.addToIndexes();
       pos = matcher.end();
       // System.out.printf("Added P: %s-%s - %s\n", matcher.group(1), matcher.group(2),

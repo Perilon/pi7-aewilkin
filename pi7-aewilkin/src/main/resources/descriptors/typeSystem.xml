@@ -164,5 +164,62 @@ You need to implement the types requried for your ranking model.</description>
         </featureDescription>
       </features>
     </typeDescription>
+  <typeDescription>
+      <name>type.AddlStats</name>
+      <description>For macro and micro F1 and MAP and MRR</description>
+      <supertypeName>uima.cas.TOP</supertypeName>
+      <features>
+        <featureDescription>
+          <name>macroF1</name>
+          <description>Macro F1 for one type of ranker</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>microF1</name>
+          <description>Micro F1 for one type of ranker</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>MAP</name>
+          <description>Mean average precision for one type of ranker</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>MRR</name>
+          <description>Mean reciprocal rank for one type of ranker</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>rrRunningTotal</name>
+          <description>Reciprocal rank running  total</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>apRunningTotal</name>
+          <description>Average precision running total</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>tpRunningTotal</name>
+          <description>True positives running total</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>fpRunningTotal</name>
+          <description>False positives running total</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>fnRunningTotal</name>
+          <description>False negatives running total</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>microAverageF1RunningTotal</name>
+          <description>The micro-average F1 running total</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
   </types>
 </typeSystemDescription>

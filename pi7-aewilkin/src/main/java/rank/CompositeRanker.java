@@ -28,6 +28,8 @@ public class CompositeRanker extends AbstractRanker implements IAggregator {
    * @param passage
    * @return a score of the passage
    */
+  
+  
   @Override
   public Double score(JCas aJCas, Question question, Passage passage) {
     List<Double> scores = new ArrayList<Double>();
@@ -44,8 +46,18 @@ public class CompositeRanker extends AbstractRanker implements IAggregator {
     // In PI7, compute the aggregated score by taking a weighted average of scores. Note that you
     // can figure out which score comes from which ranker because the index of List object 'scores'
     // corresponds to the index of List object 'rankers'.
+    
+    double total = 0;
+    double counter = 0;
+    
+    for (double score : scores) {
+      total += score;
+      counter++;
+    }
+    
+    double weightedAvg = total / counter;
 
-    return null;
+    return weightedAvg;
   }
 
 }

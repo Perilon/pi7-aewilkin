@@ -3,18 +3,18 @@
   <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
   <primitive>false</primitive>  
   <delegateAnalysisEngineSpecifiers>
-    <delegateAnalysisEngine key="questionAnnotatorDescriptor">
-      <import name="descriptors.questionAnnotatorDescriptor"/>
-    </delegateAnalysisEngine>
-    <delegateAnalysisEngine key="passageAnnotatorDescriptor">
-      <import name="descriptors.passageAnnotatorDescriptor"/>
-    </delegateAnalysisEngine>
-  <delegateAnalysisEngine key="TokenAnnotatorDescriptor">
+    <delegateAnalysisEngine key="TokenAnnotatorDescriptor">
       <import location="/home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/TokenAnnotatorDescriptor.xml"/>
-    
     </delegateAnalysisEngine>
     <delegateAnalysisEngine key="NgramAnnotatorDescriptor">
       <import location="/home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/NgramAnnotatorDescriptor.xml"/>
+    </delegateAnalysisEngine>
+  <delegateAnalysisEngine key="questionAnnotatorDescriptor">
+      <import location="/home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/questionAnnotatorDescriptor.xml"/>
+    
+    </delegateAnalysisEngine>
+    <delegateAnalysisEngine key="passageAnnotatorDescriptor">
+      <import location="/home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/passageAnnotatorDescriptor.xml"/>
     
     </delegateAnalysisEngine>
   </delegateAnalysisEngineSpecifiers>
@@ -39,7 +39,15 @@
       <capability>
         <inputs/>
         <outputs>
-          <type allAnnotatorFeatures="true">type.Question</type>
+          <type>type.Question</type>
+        <feature>type.Question:measurement</feature>
+          <feature>type.Question:passages</feature>
+          <feature>type.Question:sentence</feature>
+          <feature>type.Question:id</feature>
+          <feature>type.Question:score</feature>
+          <feature>type.Question:componentId</feature>
+          <feature>type.Question:end</feature>
+          <feature>type.Question:begin</feature>
         </outputs>
         <languagesSupported/>
       </capability>

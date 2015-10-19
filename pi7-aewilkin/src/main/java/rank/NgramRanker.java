@@ -28,6 +28,7 @@ public class NgramRanker extends AbstractRanker {
    * @return a score of the passage
    */
   
+    @Override
     public Double score(JCas aJCas, Question question, Passage passage) {
 
     FSIndex inputDocumentIndex = aJCas.getAnnotationIndex(InputDocument.type);   
@@ -156,9 +157,9 @@ public class NgramRanker extends AbstractRanker {
       F1NG = 0;
     
     
-    passage.setScoreNgram(F1NG);
+//    passage.setScoreNgram(F1NG);
     
-    passage.addToIndexes();
+//    passage.addToIndexes();
     
     
     return F1NG;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import type.Measurement;
 import type.Passage;
 import type.Question;
 import org.apache.uima.jcas.JCas;
@@ -25,12 +26,12 @@ public abstract class AbstractRanker implements IRanker {
    */
   
   
-  
-  
   public List<Passage> rank(JCas aJCas, Question question, List<Passage> passages) {
     // TODO Complete the implementation of this method.
 
     // Score all the given passages and sort them in List object 'rankedPassages' below.
+    
+    System.out.println("numPassages = " + Integer.toString(passages.size()));
     
     
     int numPassages = passages.size();
@@ -149,9 +150,7 @@ public abstract class AbstractRanker implements IRanker {
     
     /*Then put the items in that array, which are now ordered by score, into a new FSArray.  That FSArray becomes the
     RankedPassageFSArray feature of the QASet*/
-    
-    FSArray RankedPassageFSArray = new FSArray(aJCas, numPassages);
-    
+        
     for (int i = 0; i < numPassages; i++) {
       Passage newPass = new Passage(aJCas);
       
@@ -167,16 +166,16 @@ public abstract class AbstractRanker implements IRanker {
       
       newPass.setQuestion(question);
       
-      rankedPassages.set(i, newPass);
+//      rankedPassages.set(i, newPass);
+      
+      rankedPassages.add(newPass);
+      
     }
-    
     return rankedPassages;
+
     
   }
-  
-  
-  
-  
+
 
   /**
    * Returns a score of the given passage associated with the given question. A subclass needs to
