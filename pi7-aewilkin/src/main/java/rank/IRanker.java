@@ -6,6 +6,10 @@ import type.Passage;
 import type.Question;
 import org.apache.uima.jcas.JCas;
 
+import edu.cmu.meteor.scorer.MeteorConfiguration;
+import edu.cmu.meteor.scorer.MeteorScorer;
+import edu.cmu.meteor.util.Constants;
+
 
 public interface IRanker {
 
@@ -16,7 +20,7 @@ public interface IRanker {
    * @param question
    * @param passages
    */
-  public List<Passage> rank(JCas aJCas, Question question, List<Passage> passages);
+  public List<Passage> rank(JCas aJCas, Question question, List<Passage> passages, MeteorScorer scorer);
 
   /**
    * Returns a score of the given passage associated with the given question.
@@ -25,6 +29,6 @@ public interface IRanker {
    * @param passage
    * @return a score of the passage
    */
-  public Double score(JCas aJCas, Question question, Passage passage);
+  public Double score(JCas aJCas, Question question, Passage passage, MeteorScorer scorer);
 
 }

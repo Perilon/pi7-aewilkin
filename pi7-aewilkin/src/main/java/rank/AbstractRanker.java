@@ -10,6 +10,10 @@ import type.Question;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 
+import edu.cmu.meteor.scorer.MeteorConfiguration;
+import edu.cmu.meteor.scorer.MeteorScorer;
+import edu.cmu.meteor.util.Constants;
+
 
 /**
  * This class provides a skeletal implementation of interface IRanker.
@@ -26,7 +30,7 @@ public abstract class AbstractRanker implements IRanker {
    */
   
   
-  public List<Passage> rank(JCas aJCas, Question question, List<Passage> passages) {
+  public List<Passage> rank(JCas aJCas, Question question, List<Passage> passages, MeteorScorer scorer) {
     // TODO Complete the implementation of this method.
 
     // Score all the given passages and sort them in List object 'rankedPassages' below.
@@ -137,7 +141,7 @@ public abstract class AbstractRanker implements IRanker {
       psg.setBegin(passage.getBegin());
       psg.setEnd(passage.getEnd());
             
-      psg.setScore(score(aJCas, question, passage));
+      psg.setScore(score(aJCas, question, passage, scorer));
       
       psg.setSentence(passage.getSentence());
       psg.setLabel(passage.getLabel());
@@ -186,7 +190,7 @@ public abstract class AbstractRanker implements IRanker {
    * @param passage
    * @return
    */
-  public abstract Double score(JCas aJCas, Question question, Passage passage);
+  public abstract Double score(JCas aJCas, Question question, Passage passage, MeteorScorer scorer);
   
   
 

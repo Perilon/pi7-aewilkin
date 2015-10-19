@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.cas.TOP_Type;
 
 /** For macro and micro F1 and MAP and MRR
- * Updated by JCasGen Mon Oct 19 02:22:28 EDT 2015
+ * Updated by JCasGen Mon Oct 19 17:02:02 EDT 2015
  * @generated */
 public class AddlStats_Type extends TOP_Type {
   /** @generated 

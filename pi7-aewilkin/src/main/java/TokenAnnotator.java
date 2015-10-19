@@ -26,12 +26,20 @@ public class TokenAnnotator extends JCasAnnotator_ImplBase {
 
     FSIndex passageIndex = aJCas.getAnnotationIndex(Passage.type);
     FSIndex questionIndex = aJCas.getAnnotationIndex(Question.type);
+    
+    
+    
+    
+    I
+    
 
     
     Iterator passageIter = passageIndex.iterator();
     
     while (passageIter.hasNext()) {
       Passage passage = (Passage) passageIter.next();
+      
+      System.out.println( "passage.getSentence() = " + passage.getSentence()); 
     
       
       Matcher matcher = mTokenPattern.matcher(passage.getSentence());
@@ -46,6 +54,8 @@ public class TokenAnnotator extends JCasAnnotator_ImplBase {
 
         
         String ts = token.getCoveredText();
+        
+//        System.out.println( "ts = " + ts); 
 
         
         StringBuilder builder = new StringBuilder();
@@ -74,6 +84,9 @@ public class TokenAnnotator extends JCasAnnotator_ImplBase {
     
     while (questionIter.hasNext()) {
       Question question = (Question) questionIter.next();
+      
+      System.out.println( "question.getSentence() = " + question.getSentence()); 
+
 
       
       Matcher matcher = mTokenPattern.matcher(question.getSentence());

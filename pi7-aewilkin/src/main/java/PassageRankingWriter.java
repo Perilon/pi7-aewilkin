@@ -29,6 +29,10 @@ import type.Question;
 import type.AddlStats;
 import type.InputDocument;
 
+import edu.cmu.meteor.scorer.MeteorConfiguration;
+import edu.cmu.meteor.scorer.MeteorScorer;
+import edu.cmu.meteor.util.Constants;
+
 /**
  * This CAS Consumer generates the report file with the method metrics
  */
@@ -114,6 +118,15 @@ public class PassageRankingWriter extends CasConsumer_ImplBase {
         addlStats[p] = new AddlStats(aJCas);
       }
       
+      /*Initialize Meteor scorer*/
+      
+      MeteorConfiguration config = new MeteorConfiguration();
+      config.setLanguage("en");
+      config.setNormalization(Constants.NORMALIZE_NO_PUNCT);
+      MeteorScorer scorer = new MeteorScorer(config);
+      
+      
+      /*Begin main stuff*/
 
       for (Question question : subsetOfQuestions) {
 
@@ -121,9 +134,9 @@ public class PassageRankingWriter extends CasConsumer_ImplBase {
         List<Passage> passages = UimaUtils.convertFSListToList(question.getPassages(), Passage.class);
         
 
-        List<Passage> ngramRankedPassages = ngramRanker.rank(aJCas, question, passages);
-        List<Passage> otherRankedPassages = otherRanker.rank(aJCas, question, passages);
-        List<Passage> compositeRankedPassages = compositeRanker.rank(aJCas, question, passages);
+        List<Passage> ngramRankedPassages = ngramRanker.rank(aJCas, question, passages, scorer);
+        List<Passage> otherRankedPassages = otherRanker.rank(aJCas, question, passages, scorer);
+        List<Passage> compositeRankedPassages = compositeRanker.rank(aJCas, question, passages, scorer);
         
         List<List<Passage>> pig = new ArrayList<List<Passage>>();
         

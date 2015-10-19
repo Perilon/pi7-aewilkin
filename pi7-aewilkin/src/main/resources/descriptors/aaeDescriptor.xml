@@ -23,7 +23,7 @@
     <description>This is a template (empty) descriptor for your Aggerate Analysis Engine.  You will need to specify your type system and capabilities, in addition to your individual analysis engines.</description>
     <version>1.0</version>
     <vendor/>
-    <configurationParameters/>
+    <configurationParameters searchStrategy="language_fallback"/>
     <configurationParameterSettings/>
     <flowConstraints>
       <fixedFlow>
@@ -48,6 +48,12 @@
           <feature>type.Question:componentId</feature>
           <feature>type.Question:end</feature>
           <feature>type.Question:begin</feature>
+        <type allAnnotatorFeatures="true">type.Token</type>
+          <type allAnnotatorFeatures="true">type.Passage</type>
+          <type allAnnotatorFeatures="true">type.Ngram</type>
+          <type allAnnotatorFeatures="true">type.Measurement</type>
+          <type allAnnotatorFeatures="true">type.InputDocument</type>
+          <type allAnnotatorFeatures="true">type.ComponentAnnotation</type>
         </outputs>
         <languagesSupported/>
       </capability>

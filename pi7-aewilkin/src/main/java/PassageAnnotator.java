@@ -32,6 +32,9 @@ public class PassageAnnotator extends JCasAnnotator_ImplBase {
     while (matcher.find(pos)) {
       String questionId = matcher.group(1);
       Question question = questionMap.get(questionId);
+      
+      System.out.println("question.getSentence() = " + question.getSentence());
+
 
       // found one - create passage
       Passage passage = new Passage(aJCas);
@@ -41,6 +44,9 @@ public class PassageAnnotator extends JCasAnnotator_ImplBase {
       passage.setSourceDocId(matcher.group(2));
       passage.setLabel(!(matcher.group(3).compareTo("-1") == 0));
       passage.setSentence(matcher.group(4));
+      
+      System.out.println("passage.getSentence() = " + passage.getSentence());
+      
       passage.addToIndexes();
       pos = matcher.end();
       // System.out.printf("Added P: %s-%s - %s\n", matcher.group(1), matcher.group(2),

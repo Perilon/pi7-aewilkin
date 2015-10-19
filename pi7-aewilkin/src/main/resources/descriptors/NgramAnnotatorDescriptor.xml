@@ -23,6 +23,7 @@
           <type allAnnotatorFeatures="true">type.Question</type>
           <type allAnnotatorFeatures="true">type.Passage</type>
           <type allAnnotatorFeatures="true">type.ComponentAnnotation</type>
+        <type allAnnotatorFeatures="true">type.InputDocument</type>
         </inputs>
         <outputs>
           <type allAnnotatorFeatures="true">type.Token</type>
@@ -30,6 +31,7 @@
           <type allAnnotatorFeatures="true">type.Passage</type>
           <type allAnnotatorFeatures="true">type.Ngram</type>
           <type allAnnotatorFeatures="true">type.ComponentAnnotation</type>
+        <type allAnnotatorFeatures="true">type.InputDocument</type>
         </outputs>
         <languagesSupported/>
       </capability>
