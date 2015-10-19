@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<casConsumerDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <frameworkImplementation>org.apache.uima.java</frameworkImplementation>
+  <implementationName>PassageRankingWriter</implementationName>
+  <processingResourceMetaData>
+    <name>casConsumerDescriptor</name>
+    <description/>
+    <version>1.0</version>
+    <vendor/>
+    <configurationParameters>
+      <configurationParameter>
+        <name>OutputDir</name>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+    <configurationParameter>
+        <name>InputDir</name>
+        <description>The input directory.</description>
+        <type>String</type>
+        <multiValued>false</multiValued>
+        <mandatory>false</mandatory>
+      </configurationParameter>
+    </configurationParameters>
+    <configurationParameterSettings>
+      <nameValuePair>
+        <name>OutputDir</name>
+        <value>
+          <string>src/main/resources/outputData/</string>
+        </value>
+      </nameValuePair>
+    <nameValuePair>
+        <name>InputDir</name>
+        <value>
+          <string>src/main/resources/inputData/</string>
+        </value>
+      </nameValuePair>
+    </configurationParameterSettings>
+    <typeSystemDescription>
+      <imports>
+        <import location="/home/perilon/Downloads/uima-working-directory/uimaj-examples/target/classes/org/apache/uima/examples/SourceDocumentInformation.xml"/>
+      <import location="/home/perilon/School_Classes/DEIIS_class/pi7-andrewid/src/main/resources/descriptors/typeSystem.xml"/>
+      </imports>
+    </typeSystemDescription>
+    <typePriorities/>
+    <fsIndexCollection/>
+    <capabilities>
+      <capability>
+        <inputs>
+          <type allAnnotatorFeatures="true">type.Token</type>
+          <type allAnnotatorFeatures="true">type.Question</type>
+          <type allAnnotatorFeatures="true">type.QASet</type>
+          <type allAnnotatorFeatures="true">type.Passage</type>
+          <type allAnnotatorFeatures="true">type.InputDocument</type>
+          <type allAnnotatorFeatures="true">type.ComponentAnnotation</type>
+        <type allAnnotatorFeatures="true">type.Ngram</type>
+        </inputs>
+        <outputs/>
+        <languagesSupported/>
+      </capability>
+    </capabilities>
+  <operationalProperties>
+      <modifiesCas>false</modifiesCas>
+      <multipleDeploymentAllowed>false</multipleDeploymentAllowed>
+      <outputsNewCASes>false</outputsNewCASes>
+    </operationalProperties>
+  </processingResourceMetaData>
+  <resourceManagerConfiguration/>
+</casConsumerDescription>

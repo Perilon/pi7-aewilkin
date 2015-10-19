@@ -1,0 +1,71 @@
+,Question ID,True positives,False negatives,False positives,Precision,Recall,F1 score
+Ngram ranker,1897,1,0,4,0.2,1,0.333
+Other ranker,,1,0,4,0.2,1,0.333
+Composite ranker,,1,0,4,0.2,1,0.333
+,,,,,,,
+Ngram ranker,1904,2,0,3,0.4,1,0.571
+Other ranker,,2,0,3,0.4,1,0.571
+Composite ranker,,2,0,3,0.4,1,0.571
+,,,,,,,
+Ngram ranker,1971,1,3,4,0.2,0.25,0.222
+Other ranker,,0,4,5,0,0,0
+Composite ranker,,0,4,5,0,0,0
+,,,,,,,
+Ngram ranker,1980,4,4,1,0.8,0.5,0.615
+Other ranker,,4,4,1,0.8,0.5,0.615
+Composite ranker,,4,4,1,0.8,0.5,0.615
+,,,,,,,
+Ngram ranker,2000,3,1,2,0.6,0.75,0.667
+Other ranker,,4,0,1,0.8,1,0.889
+Composite ranker,,4,0,1,0.8,1,0.889
+,,,,,,,
+Ngram ranker,2058,1,1,4,0.2,0.5,0.286
+Other ranker,,2,0,3,0.4,1,0.571
+Composite ranker,,2,0,3,0.4,1,0.571
+,,,,,,,
+Ngram ranker,2122,1,0,4,0.2,1,0.333
+Other ranker,,1,0,4,0.2,1,0.333
+Composite ranker,,1,0,4,0.2,1,0.333
+,,,,,,,
+Ngram ranker,2154,1,0,4,0.2,1,0.333
+Other ranker,,1,0,4,0.2,1,0.333
+Composite ranker,,1,0,4,0.2,1,0.333
+,,,,,,,
+Ngram ranker,2331,1,1,4,0.2,0.5,0.286
+Other ranker,,1,1,4,0.2,0.5,0.286
+Composite ranker,,1,1,4,0.2,0.5,0.286
+,,,,,,,
+Ngram ranker,2393,1,0,4,0.2,1,0.333
+Other ranker,,1,0,4,0.2,1,0.333
+Composite ranker,,1,0,4,0.2,1,0.333
+,,,,,,,
+,,,,,,,
+Additional statistics for Ngram ranker:,,,,,,,
+,,,,,,,
+MAP = 0.451,,,,,,,
+MRR = 0.562,,,,,,,
+Micro-average F1 = 0.398,,,,,,,
+Macro-average F1 = 0.421,,,,,,,
+TP total = 16.0,,,,,,,
+FP total = 34.0,,,,,,,
+FN total = 10.0,,,,,,,
+,,,,,,,
+Additional statistics for Other ranker:,,,,,,,
+,,,,,,,
+MAP = 0.532,,,,,,,
+MRR = 0.545,,,,,,,
+Micro-average F1 = 0.427,,,,,,,
+Macro-average F1 = 0.447,,,,,,,
+TP total = 17.0,,,,,,,
+FP total = 33.0,,,,,,,
+FN total = 9.0,,,,,,,
+,,,,,,,
+Additional statistics for Composite ranker:,,,,,,,
+,,,,,,,
+MAP = 0.532,,,,,,,
+MRR = 0.545,,,,,,,
+Micro-average F1 = 0.427,,,,,,,
+Macro-average F1 = 0.447,,,,,,,
+TP total = 17.0,,,,,,,
+FP total = 33.0,,,,,,,
+FN total = 9.0,,,,,,,
