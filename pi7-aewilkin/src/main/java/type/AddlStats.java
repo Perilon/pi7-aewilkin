@@ -11,8 +11,8 @@ import org.apache.uima.jcas.cas.TOP;
 
 
 /** For macro and micro F1 and MAP and MRR
- * Updated by JCasGen Mon Oct 19 17:02:02 EDT 2015
- * XML source: /home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/passageAnnotatorDescriptor.xml
+ * Updated by JCasGen Mon Oct 19 17:55:16 EDT 2015
+ * XML source: /home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/typeSystem.xml
  * @generated */
 public class AddlStats extends TOP {
   /** @generated

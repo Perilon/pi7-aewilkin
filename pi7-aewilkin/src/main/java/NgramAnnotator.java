@@ -24,15 +24,28 @@ public class NgramAnnotator extends JCasAnnotator_ImplBase {
   @Override
   public void process(JCas aJCas) throws AnalysisEngineProcessException {
 
-    FSIndex answerIndex = aJCas.getAnnotationIndex(Passage.type);
+//    FSIndex answerIndex = aJCas.getAnnotationIndex(Passage.type);
     FSIndex questionIndex = aJCas.getAnnotationIndex(Question.type);
     FSIndex tokenIndex = aJCas.getAnnotationIndex(Token.type);
     
-    Iterator answerIter = answerIndex.iterator();
-        
-    while (answerIter.hasNext()) {
+    
+    
+    
+    Iterator qIter = questionIndex.iterator();
+    while (qIter.hasNext()) {
+      Question q = (Question) qIter.next();
+            
+      List<Passage> oinkapig = UimaUtils.convertFSListToList(q.getPassages(), Passage.class);
       
-      Passage answer = (Passage) answerIter.next();
+      for (Passage answer : oinkapig) {
+    
+    
+    
+//    Iterator answerIter = answerIndex.iterator();
+//        
+//    while (answerIter.hasNext()) {
+//      
+//      Passage answer = (Passage) answerIter.next();
       int beginAnswer = answer.getBegin();
       int endAnswer = answer.getEnd();
       
@@ -73,6 +86,7 @@ public class NgramAnnotator extends JCasAnnotator_ImplBase {
 
         ngram.addToIndexes();
         
+      }
       }
     }
     

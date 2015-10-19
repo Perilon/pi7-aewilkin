@@ -2,10 +2,12 @@ import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.FSList;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,24 +32,34 @@ public class TokenAnnotator extends JCasAnnotator_ImplBase {
     
     
     
-    I
-    
-
-    
-    Iterator passageIter = passageIndex.iterator();
-    
-    while (passageIter.hasNext()) {
-      Passage passage = (Passage) passageIter.next();
+    Iterator qIter = questionIndex.iterator();
+    while (qIter.hasNext()) {
+      Question q = (Question) qIter.next();
+            
+      List<Passage> oinkapig = UimaUtils.convertFSListToList(q.getPassages(), Passage.class);
       
-      System.out.println( "passage.getSentence() = " + passage.getSentence()); 
+      for (Passage passage : oinkapig) {
+    
+      int passageTokCounter = 0;
+    
+//    Iterator passageIter = passageIndex.iterator();
+//    
+//    while (passageIter.hasNext()) {
+//      Passage passage = (Passage) passageIter.next();
+      
+//      System.out.println( "passage.getSentence() = " + passage.getSentence()); 
     
       
       Matcher matcher = mTokenPattern.matcher(passage.getSentence());
       int pos = 0;
 
       while (matcher.find(pos)) {
-        
+        passageTokCounter++;
         Token token = new Token(aJCas);
+        
+//        System.out.println("Passage begin is: " + Integer.toString(passage.getBegin()));
+//        System.out.println("Passage end is: " + Integer.toString(passage.getEnd()));
+        
         
         token.setBegin(passage.getBegin() + matcher.start(1));
         token.setEnd(passage.getBegin() + matcher.end(1));
@@ -75,7 +87,11 @@ public class TokenAnnotator extends JCasAnnotator_ImplBase {
         token.setToStringValue(finalTokenLemmatized);
         
         token.addToIndexes();
+                       
         pos = matcher.end();
+      }
+      
+      passage.setLength(passageTokCounter);
         
       }
     }
@@ -85,14 +101,17 @@ public class TokenAnnotator extends JCasAnnotator_ImplBase {
     while (questionIter.hasNext()) {
       Question question = (Question) questionIter.next();
       
-      System.out.println( "question.getSentence() = " + question.getSentence()); 
+//      System.out.println( "question.getSentence() = " + question.getSentence()); 
 
-
+      int questionTokCounter = 0;
       
       Matcher matcher = mTokenPattern.matcher(question.getSentence());
       int pos = 0;
       int index = 0;
       while (matcher.find(pos)) {
+        
+        questionTokCounter++;
+        
         Token token = new Token(aJCas);
         token.setBegin(question.getBegin() + matcher.start(1));
         token.setEnd(question.getBegin() + matcher.end(1));
@@ -129,6 +148,7 @@ public class TokenAnnotator extends JCasAnnotator_ImplBase {
         
         index++;
       }
+      question.setLength(questionTokCounter);
     }
   }
 }

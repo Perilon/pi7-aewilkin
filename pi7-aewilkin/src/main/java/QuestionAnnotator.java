@@ -10,8 +10,12 @@ import type.Question;
 
 public class QuestionAnnotator extends JCasAnnotator_ImplBase {
 
-  private Pattern mQuestionPattern = Pattern.compile("(\\d{4}) QUESTION (.*)");
+//  private Pattern mQuestionPattern = Pattern.compile("(\\d{4}) QUESTION (.*)");
 
+  private Pattern mQuestionPattern = 
+        
+        Pattern.compile("([0-9]{4})[\\s]+(QUESTION)[\\s]+(.*)([\\?]?)");
+  
   @Override
   public void process(JCas aJCas) throws AnalysisEngineProcessException {
     System.out.println(">> Question Annotator Processing");
@@ -24,10 +28,13 @@ public class QuestionAnnotator extends JCasAnnotator_ImplBase {
     while (matcher.find(pos)) {
       // found one - create annotation
       Question annotation = new Question(aJCas);
-      annotation.setBegin(matcher.start());
-      annotation.setEnd(matcher.end());
+
+      annotation.setBegin(matcher.start(3));
+      annotation.setEnd(matcher.end(3));
+      
+      
       annotation.setId(matcher.group(1));
-      annotation.setSentence(matcher.group(2));
+      annotation.setSentence(matcher.group(3));
       // Add empty measurement
       annotation.setMeasurement(new Measurement(aJCas));
       annotation.addToIndexes();

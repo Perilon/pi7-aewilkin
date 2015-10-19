@@ -11,8 +11,8 @@ import org.apache.uima.jcas.cas.FSList;
 
 
 /** Stores the information about a question.
- * Updated by JCasGen Mon Oct 19 17:02:02 EDT 2015
- * XML source: /home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/passageAnnotatorDescriptor.xml
+ * Updated by JCasGen Mon Oct 19 17:55:16 EDT 2015
+ * XML source: /home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/typeSystem.xml
  * @generated */
 public class Question extends ComponentAnnotation {
   /** @generated
@@ -162,6 +162,28 @@ public class Question extends ComponentAnnotation {
     if (Question_Type.featOkTst && ((Question_Type)jcasType).casFeat_measurement == null)
       jcasType.jcas.throwFeatMissing("measurement", "type.Question");
     jcasType.ll_cas.ll_setRefValue(addr, ((Question_Type)jcasType).casFeatCode_measurement, jcasType.ll_cas.ll_getFSRef(v));}    
+   
+    
+  //*--------------*
+  //* Feature: length
+
+  /** getter for length - gets How many tokens are in the question
+   * @generated
+   * @return value of the feature 
+   */
+  public int getLength() {
+    if (Question_Type.featOkTst && ((Question_Type)jcasType).casFeat_length == null)
+      jcasType.jcas.throwFeatMissing("length", "type.Question");
+    return jcasType.ll_cas.ll_getIntValue(addr, ((Question_Type)jcasType).casFeatCode_length);}
+    
+  /** setter for length - sets How many tokens are in the question 
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setLength(int v) {
+    if (Question_Type.featOkTst && ((Question_Type)jcasType).casFeat_length == null)
+      jcasType.jcas.throwFeatMissing("length", "type.Question");
+    jcasType.ll_cas.ll_setIntValue(addr, ((Question_Type)jcasType).casFeatCode_length, v);}    
   }
 
     

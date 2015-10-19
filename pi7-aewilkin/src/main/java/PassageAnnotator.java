@@ -12,7 +12,10 @@ import type.Passage;
 import type.Question;
 
 public class PassageAnnotator extends JCasAnnotator_ImplBase {
-  private Pattern mPassagePattern = Pattern.compile("(\\d{4}) ([A-Z0-9]+\\.\\d{4}) (-?[12]) (.*)");
+//  private Pattern mPassagePattern = Pattern.compile("(\\d{4}) ([A-Z0-9]+\\.\\d{4}) (-?[12]) (.*)");
+  
+  private Pattern mPassagePattern = Pattern.compile("([0-9]{4})[\\s]+(.*[0-9]{4})[\\s](-?[12])[\\s]+(.*)");
+
 
   @Override
   public void process(JCas aJCas) throws AnalysisEngineProcessException {
@@ -33,19 +36,25 @@ public class PassageAnnotator extends JCasAnnotator_ImplBase {
       String questionId = matcher.group(1);
       Question question = questionMap.get(questionId);
       
-      System.out.println("question.getSentence() = " + question.getSentence());
+//      System.out.println("question.getSentence() = " + question.getSentence());
 
 
       // found one - create passage
       Passage passage = new Passage(aJCas);
-      passage.setBegin(matcher.start());
-      passage.setEnd(matcher.end());
+      
+      
+      passage.setBegin(matcher.start(4));
+      passage.setEnd(matcher.end(4));
+      
+      
+//      passage.setBegin(matcher.start());
+//      passage.setEnd(matcher.end());
       passage.setQuestion(question);
       passage.setSourceDocId(matcher.group(2));
       passage.setLabel(!(matcher.group(3).compareTo("-1") == 0));
       passage.setSentence(matcher.group(4));
       
-      System.out.println("passage.getSentence() = " + passage.getSentence());
+//      System.out.println("passage.getSentence() = " + passage.getSentence());
       
       passage.addToIndexes();
       pos = matcher.end();

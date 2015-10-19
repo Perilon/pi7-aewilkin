@@ -59,9 +59,9 @@ public class CompositeRanker extends AbstractRanker implements IAggregator {
       System.out.println("Score: " + Double.toString(scores.get(i)));
       
       if (i == 0) {
-        total += (scores.get(i) * 0.85);
+        total += (scores.get(i) * 0.80);
       } else if (i == 1) {
-        total += (scores.get(i) * 0.15);
+        total += (scores.get(i) * 0.20);
       }
       
       System.out.println("Total: " + Double.toString(scores.get(i)));

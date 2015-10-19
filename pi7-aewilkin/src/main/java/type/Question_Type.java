@@ -13,7 +13,7 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 
 /** Stores the information about a question.
- * Updated by JCasGen Mon Oct 19 17:02:02 EDT 2015
+ * Updated by JCasGen Mon Oct 19 17:55:16 EDT 2015
  * @generated */
 public class Question_Type extends ComponentAnnotation_Type {
   /** @generated 
@@ -140,6 +140,30 @@ public class Question_Type extends ComponentAnnotation_Type {
     ll_cas.ll_setRefValue(addr, casFeatCode_measurement, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_length;
+  /** @generated */
+  final int     casFeatCode_length;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public int getLength(int addr) {
+        if (featOkTst && casFeat_length == null)
+      jcas.throwFeatMissing("length", "type.Question");
+    return ll_cas.ll_getIntValue(addr, casFeatCode_length);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setLength(int addr, int v) {
+        if (featOkTst && casFeat_length == null)
+      jcas.throwFeatMissing("length", "type.Question");
+    ll_cas.ll_setIntValue(addr, casFeatCode_length, v);}
+    
+  
 
 
 
@@ -167,6 +191,10 @@ public class Question_Type extends ComponentAnnotation_Type {
  
     casFeat_measurement = jcas.getRequiredFeatureDE(casType, "measurement", "type.Measurement", featOkTst);
     casFeatCode_measurement  = (null == casFeat_measurement) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_measurement).getCode();
+
+ 
+    casFeat_length = jcas.getRequiredFeatureDE(casType, "length", "uima.cas.Integer", featOkTst);
+    casFeatCode_length  = (null == casFeat_length) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_length).getCode();
 
   }
 }

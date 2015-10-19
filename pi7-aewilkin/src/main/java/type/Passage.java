@@ -10,8 +10,8 @@ import org.apache.uima.jcas.cas.TOP_Type;
 
 
 /** Stores the information of the passage.
- * Updated by JCasGen Mon Oct 19 17:02:02 EDT 2015
- * XML source: /home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/passageAnnotatorDescriptor.xml
+ * Updated by JCasGen Mon Oct 19 17:55:16 EDT 2015
+ * XML source: /home/perilon/git/pi7-aewilkin/pi7-aewilkin/src/main/resources/descriptors/typeSystem.xml
  * @generated */
 public class Passage extends ComponentAnnotation {
   /** @generated
@@ -205,6 +205,28 @@ public class Passage extends ComponentAnnotation {
     if (Passage_Type.featOkTst && ((Passage_Type)jcasType).casFeat_scoreOther == null)
       jcasType.jcas.throwFeatMissing("scoreOther", "type.Passage");
     jcasType.ll_cas.ll_setDoubleValue(addr, ((Passage_Type)jcasType).casFeatCode_scoreOther, v);}    
+   
+    
+  //*--------------*
+  //* Feature: length
+
+  /** getter for length - gets How many tokens are in the passage
+   * @generated
+   * @return value of the feature 
+   */
+  public int getLength() {
+    if (Passage_Type.featOkTst && ((Passage_Type)jcasType).casFeat_length == null)
+      jcasType.jcas.throwFeatMissing("length", "type.Passage");
+    return jcasType.ll_cas.ll_getIntValue(addr, ((Passage_Type)jcasType).casFeatCode_length);}
+    
+  /** setter for length - sets How many tokens are in the passage 
+   * @generated
+   * @param v value to set into the feature 
+   */
+  public void setLength(int v) {
+    if (Passage_Type.featOkTst && ((Passage_Type)jcasType).casFeat_length == null)
+      jcasType.jcas.throwFeatMissing("length", "type.Passage");
+    jcasType.ll_cas.ll_setIntValue(addr, ((Passage_Type)jcasType).casFeatCode_length, v);}    
   }
 
     

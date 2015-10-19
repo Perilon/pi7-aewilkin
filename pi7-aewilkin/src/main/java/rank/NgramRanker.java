@@ -1,5 +1,6 @@
 package rank;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -48,6 +49,9 @@ public class NgramRanker extends AbstractRanker {
       tokenQuestionStringArray[i] = tokenQuestionList.get(i).getToStringValue();
     }
     
+//    System.out.println("tokenQuestionStringArray: ");
+//    System.out.println(Arrays.toString(tokenQuestionStringArray) + "\n");
+    
     
     /*Do the same thing for the ngrams.*/
     
@@ -73,7 +77,8 @@ public class NgramRanker extends AbstractRanker {
       tokenPassageStringArray[j] = tokenPassageList.get(j).getToStringValue();
     }
       
-      
+//    System.out.println("tokenPassageStringArray: ");
+//    System.out.println(Arrays.toString(tokenPassageStringArray) + "\n");
       
     /*Get the passage ngrams too.*/
     
@@ -102,8 +107,7 @@ public class NgramRanker extends AbstractRanker {
         if (!tokenPassageStringArray[L].equals("") &&
                 tokenPassageStringArray[L].charAt(0) != '<' && 
                 tokenPassageStringArray[L].charAt(tokenPassageStringArray[L].length() - 1) != '>') {
-//                  !(Arrays.asList(stopwords).contains(tokenPassageStringArray[L])) &&
-//                  !(Arrays.asList(stopwords).contains(tokenQuestionStringArray[k]))) {
+
           worthyMatches++;
           if (tokenQuestionStringArray[k].equals(tokenPassageStringArray[L])) {
             matchesCounter++;
@@ -112,10 +116,16 @@ public class NgramRanker extends AbstractRanker {
       }
     }
       
-      
+  
+    
     double precision = (double) matchesCounter / (double) worthyMatches;
     double recall = (double) matchesCounter / (double) tokenQuestionStringArray.length;
     double F1;
+    
+//    System.out.println("matchesCounter: " + Double.toString(matchesCounter));
+//    System.out.println("worthyMatches: " + Double.toString(worthyMatches));
+//    System.out.println("precision: " + Double.toString(precision));
+//    System.out.println("recall: " + Double.toString(recall) + "\n");
     
     if ((precision + recall) != 0) {
       F1 = 2 * ((precision * recall) / (precision + recall));
