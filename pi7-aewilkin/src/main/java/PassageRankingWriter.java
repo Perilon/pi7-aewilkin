@@ -1,8 +1,12 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.uima.cas.CAS;
@@ -23,6 +27,7 @@ import type.Measurement;
 import type.Passage;
 import type.Question;
 import type.AddlStats;
+import type.InputDocument;
 
 /**
  * This CAS Consumer generates the report file with the method metrics
@@ -75,33 +80,43 @@ public class PassageRankingWriter extends CasConsumer_ImplBase {
         return;
       }
 
-      writer.println(",question_id,tp,fn,fp,precision,recall,f1");
+      writer.println(",Question ID,True positives,False negatives,False positives,Precision,Recall,F1 score");
+      
       // Retrieve all the questions for printout
       List<Question> allQuestions = UimaUtils.getAnnotations(aJCas, Question.class);
-      List<Question> subsetOfQuestions = RandomUtils.getRandomSubset(allQuestions, 10);
+      List<Question> subsetOfQuestions0 = RandomUtils.getRandomSubset(allQuestions, 10);
+           
+      int questionCounter = subsetOfQuestions0.size();
+      List<Question> subsetOfQuestions = new ArrayList(questionCounter);
 
       // TODO: Here one needs to sort the questions in ascending order of their question ID
       
-//      List<Question> orderedSubsOfQs = new ArrayList<Question>();
-//      
-//      for (Question question : subsetOfQuestions) {
-//        if (orderedSubsOfQs.size() == 0) {
-//          orderedSubsOfQs.
-//        }
-//      }
+      int[] tempArray = new int[questionCounter];
+      
+      for (int i = 0; i < questionCounter; i++) {
+        tempArray[i] = Integer.parseInt((subsetOfQuestions0.get(i)).getId());
+      }
+      
+      Arrays.sort(tempArray);
+      
+      for (int id : tempArray) {
+        for (Question q : subsetOfQuestions0) {
+          if (Integer.parseInt(q.getId()) == id) {
+            subsetOfQuestions.add(q);
+          }
+        }
+      }
       
       
       AddlStats[] addlStats = new AddlStats[3];
+      
+      for (int p = 0; p < addlStats.length; p++) {
+        addlStats[p] = new AddlStats(aJCas);
+      }
+      
 
       for (Question question : subsetOfQuestions) {
-        
-        int questionCounter = 0;
-        double apRunningTotal = 0;
-        double rrRunningTotal = 0;
-        double microAverageF1RunningTotal = 0;
-        double tpRunningTotal = 0;
-        double fpRunningTotal = 0;
-        double fnRunningTotal = 0;
+
         
         List<Passage> passages = UimaUtils.convertFSListToList(question.getPassages(), Passage.class);
         
@@ -157,6 +172,7 @@ public class PassageRankingWriter extends CasConsumer_ImplBase {
           /*Calculate the average precision for the ranked passages*/
           
           double numCorrectRunningTotal = 0;
+          double apRunningTotal = 0;
           
           for (int i = 0; i < numPassages; i++) {
             if ((((Passage) passageList.get(i)).getLabel()) == true ) {
@@ -166,6 +182,12 @@ public class PassageRankingWriter extends CasConsumer_ImplBase {
           }
               
           double AP;
+          
+          for (int i = 0; i < numPassages; i++) {
+            if ((((Passage) passageList.get(i)).getLabel()) == true) {
+              totalNumCorrect++;
+            }
+          }
           
           if (totalNumCorrect > 0) {
             AP = apRunningTotal / (double) totalNumCorrect;
@@ -213,38 +235,119 @@ public class PassageRankingWriter extends CasConsumer_ImplBase {
           
           double rrrt = addlStats[k].getRrRunningTotal();
           addlStats[k].setRrRunningTotal(rrrt + RR);
+          
           double aprt = addlStats[k].getApRunningTotal();
-          addlStats[k].setRrRunningTotal(aprt + AP);
+          addlStats[k].setApRunningTotal(aprt + AP);
+          
           double micaf1rt = addlStats[k].getMicroAverageF1RunningTotal();
           addlStats[k].setMicroAverageF1RunningTotal(micaf1rt + f1);
-          double tprt = addlStats[k].getRrRunningTotal();
-          addlStats[k].setRrRunningTotal(tprt + TP);
-          double fprt = addlStats[k].getRrRunningTotal();
-          addlStats[k].setRrRunningTotal(fprt + FP);
-          double fnrt = addlStats[k].getRrRunningTotal();
-          addlStats[k].setRrRunningTotal(fnrt + FN);
           
-//          rrRunningTotal += RR;
-//          apRunningTotal += AP;
-//          microAverageF1RunningTotal += f1;
-//          
-//          tpRunningTotal += TP;
-//          fpRunningTotal += FP;
-//          fnRunningTotal += FN;
+          double tprt = addlStats[k].getTpRunningTotal();
+          addlStats[k].setTpRunningTotal(tprt + TP);
+          
+          double fprt = addlStats[k].getFpRunningTotal();
+          addlStats[k].setFpRunningTotal(fprt + FP);
+          
+          double fnrt = addlStats[k].getFnRunningTotal();
+          addlStats[k].setFnRunningTotal(fnrt + FN);
+          
+          
+          BigDecimal bd1 = new BigDecimal(RR).setScale(3, RoundingMode.HALF_EVEN);
+          RR = bd1.doubleValue();
+          BigDecimal bd2 = new BigDecimal(AP).setScale(3, RoundingMode.HALF_EVEN);
+          AP = bd2.doubleValue();
+          BigDecimal bd3 = new BigDecimal(precision).setScale(3, RoundingMode.HALF_EVEN);
+          precision = bd3.doubleValue();
+          BigDecimal bd4 = new BigDecimal(recall).setScale(3, RoundingMode.HALF_EVEN);
+          recall = bd4.doubleValue();
+          BigDecimal bd5 = new BigDecimal(accuracy).setScale(3, RoundingMode.HALF_EVEN);
+          accuracy = bd5.doubleValue();
+          BigDecimal bd6 = new BigDecimal(error).setScale(3, RoundingMode.HALF_EVEN);
+          error = bd6.doubleValue();
+          BigDecimal bd7 = new BigDecimal(f1).setScale(3, RoundingMode.HALF_EVEN);
+          f1 = bd7.doubleValue();
           
         
-        if (k == 0) {
-          writer.write("Ngram ranker" + "," + question.getId() + "," + Double.toString(tp) + "," + Double.toString(fn) + "," + 
-          Double.toString(fp) + "," + Double.toString(precision) + "," + Double.toString(recall) + "," + Double.toString(f1) + "\n");
-        } else if (k == 1) {
-          writer.write("Other ranker" + "," + "," + Double.toString(tp) + "," + Double.toString(fn) + "," + 
-          Double.toString(fp) + "," + Double.toString(precision) + "," + Double.toString(recall) + "," + Double.toString(f1) + "\n");
-        } else {  /*if k == 2*/
-          writer.write("Composite ranker" + "," + "," + Double.toString(tp) + "," + Double.toString(fn) + "," + 
-          Double.toString(fp) + "," + Double.toString(precision) + "," + Double.toString(recall) + "," + Double.toString(f1) + "\n\n");
-        }
+          if (k == 0) {
+            writer.write("Ngram ranker" + "," + question.getId() + "," + Double.toString(tp) + "," + Double.toString(fn) + "," + 
+            Double.toString(fp) + "," + Double.toString(precision) + "," + Double.toString(recall) + "," + Double.toString(f1) + "\n");
+          } else if (k == 1) {
+            writer.write("Other ranker" + "," + "," + Double.toString(tp) + "," + Double.toString(fn) + "," + 
+            Double.toString(fp) + "," + Double.toString(precision) + "," + Double.toString(recall) + "," + Double.toString(f1) + "\n");
+          } else {  /*if k == 2*/
+            writer.write("Composite ranker" + "," + "," + Double.toString(tp) + "," + Double.toString(fn) + "," + 
+            Double.toString(fp) + "," + Double.toString(precision) + "," + Double.toString(recall) + "," + Double.toString(f1) + "\n\n");
+          }
         
         }
+        
+      }
+      
+      writer.write("\n");
+      
+      for (int K = 0; K < addlStats.length; K++) {
+        
+        double MAP = addlStats[K].getApRunningTotal() / (double) questionCounter;
+        addlStats[K].setMAP(MAP);
+        
+        double MRR = addlStats[K].getRrRunningTotal() / (double) questionCounter;
+        addlStats[K].setMRR(MRR);
+        
+        double microAverageF1 = addlStats[K].getMicroAverageF1RunningTotal() / (double) questionCounter;
+        addlStats[K].setMicroF1(microAverageF1);
+        
+        double macroPrecision = 0;
+        double macroRecall = 0;
+        double macroF1 = 0;
+        
+        if ((addlStats[K].getTpRunningTotal() + addlStats[K].getFpRunningTotal()) != 0) {
+          macroPrecision = addlStats[K].getTpRunningTotal() / (addlStats[K].getTpRunningTotal() + addlStats[K].getFpRunningTotal());
+        } else {
+          macroPrecision = 0;
+        }
+        
+        if ((addlStats[K].getTpRunningTotal() + addlStats[K].getFnRunningTotal()) != 0) {
+          macroRecall = addlStats[K].getTpRunningTotal() / (addlStats[K].getTpRunningTotal() + addlStats[K].getFnRunningTotal());
+        } else {
+          macroRecall = 0;
+        }       
+        
+        if ((macroPrecision + macroRecall) != 0) {
+          macroF1 = (2 * ((macroPrecision * macroRecall) / (macroPrecision + macroRecall)));
+        } else {
+          macroF1 = 0;
+        }
+        
+        addlStats[K].setMacroF1(macroF1);
+        
+      }
+      
+      for (int K = 0; K < addlStats.length; K++) {
+        
+        if (K == 0) {
+          writer.write("Additional statistics for Ngram ranker:\n");
+        } else if (K == 1) {
+          writer.write("Additional statistics for Other ranker:\n");
+        } else {
+          writer.write("Additional statistics for Composite ranker:\n");
+        }
+        
+        BigDecimal bd8 = new BigDecimal(addlStats[K].getMAP()).setScale(3, RoundingMode.HALF_EVEN);
+        addlStats[K].setMAP(bd8.doubleValue());
+        BigDecimal bd9 = new BigDecimal(addlStats[K].getMRR()).setScale(3, RoundingMode.HALF_EVEN);
+        addlStats[K].setMRR(bd9.doubleValue());
+        BigDecimal bd10 = new BigDecimal(addlStats[K].getMicroF1()).setScale(3, RoundingMode.HALF_EVEN);
+        addlStats[K].setMicroF1(bd10.doubleValue());
+        BigDecimal bd11 = new BigDecimal(addlStats[K].getMacroF1()).setScale(3, RoundingMode.HALF_EVEN);
+        addlStats[K].setMacroF1(bd11.doubleValue());
+
+        writer.write("\nMAP = " + Double.toString(addlStats[K].getMAP()));
+        writer.write("\nMRR = " + Double.toString(addlStats[K].getMRR()));
+        writer.write("\nMicro-average F1 = " + Double.toString(addlStats[K].getMicroF1()));
+        writer.write("\nMacro-average F1 = " + Double.toString(addlStats[K].getMacroF1()));
+        writer.write("\nTP total = " + Double.toString(addlStats[K].getTpRunningTotal()));
+        writer.write("\nFP total = " + Double.toString(addlStats[K].getFpRunningTotal()));
+        writer.write("\nFN total = " + Double.toString(addlStats[K].getFnRunningTotal()) + "\n\n");
         
       }
       

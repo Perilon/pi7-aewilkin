@@ -13,7 +13,7 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 
 /** Stores all the questions and its associated answer candidates.
- * Updated by JCasGen Mon Oct 19 02:04:09 EDT 2015
+ * Updated by JCasGen Mon Oct 19 02:22:27 EDT 2015
  * @generated */
 public class InputDocument_Type extends ComponentAnnotation_Type {
   /** @generated 
